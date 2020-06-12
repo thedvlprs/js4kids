@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hangman!</title>
+    </head>
+    <body>
+        <h1>Let's play Hangman!</h1>
+        <script>
+            // Create an array of words
+            let words = [
+                'javascript',
+                'keyboard',
+                'coding',
+                'python',
+                'hangman',
+            ];
+
+            // Pick a random word
+            let word = words[Math.floor(Math.random() * words.length)];
+
+            // Set up the answer array
+            let answerArray = [];
+            for (let i = 0; i < word.length; i++) {
+                answerArray[i] = '_';
+            }
+
+            let remainingLetters = word.length;
+            // #3 Limit on moves (p 125)
+            let guesses = 20;
+
+            // The game loop
+            while (remainingLetters > 0 && guesses > 0) {
+                // Show the player their progress
+                alert(answerArray.join(' '));
+
+                // Get a guess from the player
+                let guess = prompt(
+                    'Guess a letter, or click Cancel to stop playing.'
+                );
+                if (guess === null) {
+                    // Exit the game loop
+                    break;
+                } else if (guess.length !== 1) {
+                    alert('Please enter a single letter.');
+                } else {
+                    guesses--;
+                    // #2 Capital letters (p 125)
+                    guess = guess.toLowerCase();
+                    // Update the game state with the guess
+                    for (let j = 0; j < word.length; j++) {
+                        if (word[j] === guess && answerArray[j] === '_') {
+                            answerArray[j] = guess;
+                            remainingLetters--;
+                        }
+                    }
+                }
+                // The end of the game loop
+            }
+
+            // Show the answer and congratulate the player
+            alert(answerArray.join(' '));
+            if (guesses > 0) {
+                alert('Good job! The answer was ' + word);
+            } else {
+                alert('Too bad! The answer was ' + word);
+            }
+        </script>
+    </body>
+</html>

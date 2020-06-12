@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>JQuery Exercises</title>
+    </head>
+    <body>
+        <h1 id="main-heading">Hello, world!</h1>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+            $('#main-heading').text('My friends').fadeTo(2000, 0.5);
+
+            let friends = ['Angie', 'Mona', 'Mara'];
+
+            for (let i = 0; i < friends.length; i++) {
+                $('body').append('<p>' + friends[i] + '</p>');
+                $('p')
+                    .last()
+                    .hide()
+                    .delay((i + 1) * 3000)
+                    .fadeIn(2000);
+            }
+
+            $('p').append(' bff 💗');
+        </script>
+    </body>
+</html>

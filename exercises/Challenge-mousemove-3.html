@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mouse move</title>
+    </head>
+    <body>
+        <h1 id="heading">Остановка анимации по клику</h1>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <script>
+            let direction = 'вправо';
+            let offset = 0;
+
+            $('#heading').offset({ left: offset, top: offset });
+
+            let moveHeading = function () {
+                if (direction === 'вправо') {
+                    $('#heading').offset({ left: offset });
+                    offset++;
+                    if (offset > 200) {
+                        offset = 0;
+                        direction = 'вниз';
+                    }
+                } else if (direction === 'вниз') {
+                    $('#heading').offset({ top: offset });
+                    offset++;
+                    if (offset > 200) {
+                        offset = 200;
+                        direction = 'влево';
+                    }
+                } else if (direction === 'влево') {
+                    $('#heading').offset({ left: offset });
+                    offset--;
+                    if (offset < 0) {
+                        offset = 200;
+                        direction = 'вверх';
+                    }
+                } else if (direction === 'вверх') {
+                    $('#heading').offset({ top: offset });
+                    offset--;
+                    if (offset < 0) {
+                        offset = 0;
+                        direction = 'вправо';
+                    }
+                }
+            };
+
+            let intervalId = setInterval(moveHeading, 30);
+
+            $('#heading').click(function () {
+                clearInterval(intervalId);
+            });
+        </script>
+    </body>
+</html>
